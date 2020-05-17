@@ -3,7 +3,7 @@ import { useIntl, changeLocale } from "gatsby-plugin-intl"
 
 const locales = ["en", "cn"]
 
-const Lang: FC = () => {
+export const Lang: FC = () => {
   const intl = useIntl()
 
   return (
@@ -21,5 +21,3 @@ const Lang: FC = () => {
     </select>
   )
 }
-
-export default Lang

@@ -1,10 +1,13 @@
+import React, { FC } from "react"
 import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
 
-import Lang from "./lang"
+import { Lang } from "./Lang"
 
-const Header = ({ siteTitle }) => (
+type Props = {
+  siteTitle?: string
+}
+
+export const Header: FC<Props> = ({ siteTitle = "" }) => (
   <header
     style={{
       background: `rebeccapurple`,
@@ -36,13 +39,3 @@ const Header = ({ siteTitle }) => (
     </div>
   </header>
 )
-
-Header.propTypes = {
-  siteTitle: PropTypes.string
-}
-
-Header.defaultProps = {
-  siteTitle: ``
-}
-
-export default Header
