@@ -10,6 +10,7 @@ exports.onCreateNode = ({ node, actions }) => {
 }
 
 exports.createPages = async ({ graphql, actions }) => {
+  const template = require.resolve("./src/template/blog.tsx")
   const { createPage } = actions
   const blogs = await graphql(`
     {
@@ -23,7 +24,7 @@ exports.createPages = async ({ graphql, actions }) => {
               }
               frontmatter {
                 title
-                path
+                author
                 date
               }
             }
@@ -38,10 +39,16 @@ exports.createPages = async ({ graphql, actions }) => {
   }
   const postList = blogs.data.blog.edges
   postList.forEach(({ node: post }) => {
-    const title = post.relativeDirectory
+    const slug = post.relativeDirectory
     const locale = post.childMdx.fields.locale
+    const { title, author } = post.childMdx.frontmatter
     createPage({
-      path: `/posts/${title}/${locale}`
+      path: `/posts/${slug}/${locale}`,
+      component: template,
+      context: {
+        title,
+        author
+      }
     })
   })
 }
