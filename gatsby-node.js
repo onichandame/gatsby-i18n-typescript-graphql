@@ -1,11 +1,24 @@
-const { basename } = require("path")
+const { basename, dirname } = require("path")
 const { useIntl } = require("gatsby-plugin-intl")
+
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage, deletePage } = actions
+  const intl = useIntl()
+  deletePage(page)
+  if (page.path)
+    createPage({
+      ...page,
+      locale: intl.locale
+    })
+}
 
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
   if (node.internal.type === "Mdx") {
     const locale = basename(node.fileAbsolutePath, ".mdx")
+    const name = basename(dirname(node.fileAbsolutePath))
     createNodeField({ node, name: "locale", value: locale })
+    createNodeField({ node, name: "name", value: name })
   }
 }
 
