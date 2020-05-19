@@ -1,18 +1,15 @@
 require("ts-node").register({ files: true })
 
+const { localize } = require("./src/utils/localize")
+
 const { basename, dirname } = require("path")
 const locales = require("./src/i18n/locales").default
 
 exports.onCreatePage = ({ page, actions }) => {
-  console.log(page.path)
   const { createPage, deletePage } = actions
   deletePage(page)
   locales.map(locale => {
-    let localizedPath = locale ? `${locale}${page.path}` : page.path
-    localizedPath =
-      localizedPath[localizedPath.length - 1] === "/"
-        ? localizedPath.substr(0, localizedPath.length - 1)
-        : localizedPath
+    let localizedPath = locale ? localize(locale, page.path) : page.path
 
     return createPage({
       ...page,
@@ -23,7 +20,6 @@ exports.onCreatePage = ({ page, actions }) => {
       }
     })
   })
-  console.log(page.path)
 }
 
 exports.onCreateNode = ({ node, actions }) => {
@@ -70,7 +66,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const locale = post.childMdx.fields.locale
     const { title, author } = post.childMdx.frontmatter
     createPage({
-      path: `${locale}/posts/${slug}`,
+      path: localize(locale, `/posts/${slug}`),
       component: template,
       context: {
         locale,

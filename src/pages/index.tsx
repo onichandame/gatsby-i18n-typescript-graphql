@@ -1,27 +1,50 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
+import React, { FC } from "react"
+import { graphql, PageProps } from "gatsby"
 
 import { Layout } from "../components/Layout"
 import { Image } from "../components/Image"
-import { useTranslation } from "../i18n"
+import { LocalizedLink } from "../i18n/LocalizedLink"
 
-const IndexPage = ({ data: { allMdx } }) => {
-  const { locale } = useTranslation()
+type Props = PageProps<
+  {
+    allMdx: {
+      edges: {
+        node: {
+          frontmatter: {
+            title: string
+          }
+          fields: {
+            name: string
+            locale: string
+          }
+          parent: {
+            relativeDirectory: string
+          }
+        }
+      }[]
+    }
+  },
+  { locale: string }
+>
+
+const IndexPage: FC<Props> = ({
+  data: { allMdx },
+  pageContext: { locale }
+}) => {
   return (
-    <Layout title="Home">
+    <Layout title="Home" locale={locale}>
       <h1>Hi</h1>
       <p>Welcome to my site.</p>
       <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
         <Image />
       </div>
-      <Link to="/page-2/">Go to page 2</Link>
       <div>
         {allMdx.edges.map(({ node: post }) => (
           <div>
             <h5>{post.frontmatter.title}</h5>
-            <Link to={`/${locale}/posts/${post.parent.relativeDirectory}`}>
+            <LocalizedLink to={`posts/${post.parent.relativeDirectory}`}>
               {post.parent.relativeDirectory}
-            </Link>
+            </LocalizedLink>
           </div>
         ))}
       </div>

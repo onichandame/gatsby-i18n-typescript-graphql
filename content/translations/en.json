@@ -1,3 +1,6 @@
 {
-  "title": "Gatsby Template"
+  "home": "Gatsby Template",
+  "404": "NOT FOUND",
+  "404_desc": "You just hit a route that doesn&#39;t exist... the sadness.",
+  "author": "author"
 }

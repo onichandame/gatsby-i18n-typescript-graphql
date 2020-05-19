@@ -1,3 +1,6 @@
 {
-  "title": "Gatsby模板"
+  "home": "Gatsby模板",
+  "404": "找不到此网页",
+  "404_desc": "请求的网页不存在",
+  "author": "author"
 }
