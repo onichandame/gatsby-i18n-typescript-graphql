@@ -4,6 +4,7 @@ const { basename, dirname } = require("path")
 const locales = require("./src/i18n/locales").default
 
 exports.onCreatePage = ({ page, actions }) => {
+  console.log(page.path)
   const { createPage, deletePage } = actions
   deletePage(page)
   locales.map(locale => {
@@ -12,6 +13,7 @@ exports.onCreatePage = ({ page, actions }) => {
       localizedPath[localizedPath.length - 1] === "/"
         ? localizedPath.substr(0, localizedPath.length - 1)
         : localizedPath
+
     return createPage({
       ...page,
       path: localizedPath,
@@ -21,6 +23,7 @@ exports.onCreatePage = ({ page, actions }) => {
       }
     })
   })
+  console.log(page.path)
 }
 
 exports.onCreateNode = ({ node, actions }) => {

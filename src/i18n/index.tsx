@@ -1,7 +1,7 @@
-import { createContext, useContext } from "react"
+import React, { createContext, useContext } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
-import * as locales from "./locales"
+import locales from "./locales"
 
 export { locales }
 export const defaultLocale = locales[0]
@@ -28,7 +28,9 @@ const query = graphql`
       edges {
         node {
           name
-          translations: childTranslationsJson
+          translations: childTranslationsJson {
+            title
+          }
         }
       }
     }
