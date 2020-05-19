@@ -1,3 +1,5 @@
+require("ts-node").register({ files: true })
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -5,20 +7,23 @@ module.exports = {
     author: `@gatsbyjs`
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-plugin-intl`,
+      resolve: "gatsby-plugin-typescript",
       options: {
-        // language JSON resource path
-        path: `${__dirname}/src/intl`,
-        // supported language
-        languages: [`en`, `cn`],
-        // language file path
-        defaultLanguage: `en`,
-        // option to redirect to `/en` when connecting `/`
-        redirect: false
+        isTSX: true,
+        jsxPragma: "jsx",
+        allExtensionis: true
       }
     },
+    `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `translations`,
+        path: `${__dirname}/content/translations`
+      }
+    },
+    "gatsby-transformer-json",
     {
       resolve: `gatsby-source-filesystem`,
       options: {

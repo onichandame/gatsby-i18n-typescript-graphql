@@ -1,12 +1,12 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import { useIntl } from "gatsby-plugin-intl"
 
 import { Layout } from "../components/Layout"
 import { Image } from "../components/Image"
+import { useTranslation } from "../i18n"
 
 const IndexPage = ({ data: { allMdx } }) => {
-  const intl = useIntl()
+  const { locale } = useTranslation()
   return (
     <Layout title="Home">
       <h1>Hi</h1>
@@ -19,9 +19,9 @@ const IndexPage = ({ data: { allMdx } }) => {
         {allMdx.edges.map(({ node: post }) => (
           <div>
             <h5>{post.frontmatter.title}</h5>
-            <a href={`/posts/${post.parent.relativeDirectory}/${intl.locale}`}>
+            <Link to={`/${locale}/posts/${post.parent.relativeDirectory}`}>
               {post.parent.relativeDirectory}
-            </a>
+            </Link>
           </div>
         ))}
       </div>

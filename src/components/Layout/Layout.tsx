@@ -1,19 +1,24 @@
 import React, { FC, ComponentProps } from "react"
-import { useIntl } from "gatsby-plugin-intl"
 
+import { LocaleContext, useTranslation } from "../../i18n"
 import "./Layout.css"
 import { Header } from "./Header"
 import { Footer } from "./Footer"
 import { SEO } from "./SEO"
 
-type Props = ComponentProps<typeof SEO>
+type Props = { pageContext?: { locale: string } } & ComponentProps<typeof SEO>
 
-export const Layout: FC<Props> = ({ children, ...other }) => {
-  const intl = useIntl()
-
+export const Layout: FC<Props> = ({
+  children,
+  pageContext: { locale },
+  ...other
+}) => {
+  const {
+    translations: { title }
+  } = useTranslation()
   return (
-    <>
-      <Header siteTitle={intl.formatMessage({ id: "title" })} />
+    <LocaleContext.Provider value={locale}>
+      <Header siteTitle={title} />
       <SEO {...other} />
       <div
         style={{
@@ -25,6 +30,6 @@ export const Layout: FC<Props> = ({ children, ...other }) => {
         <main>{children}</main>
         <Footer />
       </div>
-    </>
+    </LocaleContext.Provider>
   )
 }

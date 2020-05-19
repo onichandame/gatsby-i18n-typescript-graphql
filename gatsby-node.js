@@ -1,15 +1,26 @@
+require("ts-node").register({ files: true })
+
 const { basename, dirname } = require("path")
-const { useIntl } = require("gatsby-plugin-intl")
+const locales = require("./src/i18n/locales").default
 
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions
-  const intl = useIntl()
   deletePage(page)
-  if (page.path)
-    createPage({
+  locales.map(locale => {
+    let localizedPath = locale ? `${locale}${page.path}` : page.path
+    localizedPath =
+      localizedPath[localizedPath.length - 1] === "/"
+        ? localizedPath.substr(0, localizedPath.length - 1)
+        : localizedPath
+    return createPage({
       ...page,
-      locale: intl.locale
+      path: localizedPath,
+      context: {
+        ...page.context,
+        locale
+      }
     })
+  })
 }
 
 exports.onCreateNode = ({ node, actions }) => {
@@ -56,9 +67,10 @@ exports.createPages = async ({ graphql, actions }) => {
     const locale = post.childMdx.fields.locale
     const { title, author } = post.childMdx.frontmatter
     createPage({
-      path: `/posts/${slug}/${locale}`,
+      path: `${locale}/posts/${slug}`,
       component: template,
       context: {
+        locale,
         title,
         author
       }

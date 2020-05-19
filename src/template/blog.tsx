@@ -25,8 +25,11 @@ const Post: FC<Props> = ({ data: { mdx } }) => {
 export default Post
 
 export const query = graphql`
-  query Post($title: String!) {
-    mdx(frontmatter: { title: { eq: $title } }) {
+  query Post($title: String!, $locale: String!) {
+    mdx(
+      frontmatter: { title: { eq: $title } }
+      fields: { locale: { eq: $locale } }
+    ) {
       frontmatter {
         title
       }
