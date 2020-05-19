@@ -1,7 +1,17 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+const React = require("react")
+const { localize } = require("./src/i18n/localize")
+const { locales } = require("./src/i18n/locales")
 
-// You can delete this file if you're not using it
+exports.wrapPageElement = ({ element, props }, pluginOptions) => {
+  if (typeof window !== "undefined") {
+    const paths = window.location.pathname.split("/").filter(path => !!path)
+    if (paths.length) {
+      if (locales.indexOf(paths[0]) < 0) {
+        window.location.replace(localize("en", window.location.pathname))
+      }
+    } else {
+      window.location.replace(localize("en", window.location.pathname))
+    }
+  }
+  return <div>{element}</div>
+}
