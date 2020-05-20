@@ -33,7 +33,7 @@ exports.onCreateNode = ({ node, actions }) => {
 }
 
 exports.createPages = async ({ graphql, actions }) => {
-  const template = require.resolve("./src/template/blog.tsx")
+  const template = require.resolve("./src/template/blog")
   const { createPage } = actions
   const blogs = await graphql(`
     {
