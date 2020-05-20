@@ -1,1 +1,1 @@
-// You can delete this file if you're not using SSR
+export { wrapPageElement } from "./wrapPage"
