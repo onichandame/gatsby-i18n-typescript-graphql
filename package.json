@@ -34,7 +34,7 @@
     "build": "gatsby build",
     "dev": "gatsby develop -H 0.0.0.0 -p 3000",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
-    "start": "gatsby serve -H 0.0.0.0 -p 3000",
+    "start": "gatsby serve -H 0.0.0.0 -p $PORT",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },

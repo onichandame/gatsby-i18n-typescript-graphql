@@ -15,9 +15,9 @@ jobs:
       with:
         node-version: 14.x
     - name: Set up dependency
-      run: yarn install --frozen-lockfile
+      run: yarn --frozen-lockfile
     - name: Build pages
-      run: yarn build:docs
+      run: yarn build
     - name: Publish
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
