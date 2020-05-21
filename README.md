@@ -14,4 +14,4 @@ use this template to start off a gatsby project with ts and i18n
 
 # Example
 
-<https://onichandame.github.com/gatsby-template>
+<http://onichandame.github.io/gatsby-template>
