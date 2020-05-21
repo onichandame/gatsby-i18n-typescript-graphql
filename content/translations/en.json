@@ -1,6 +1,6 @@
 {
   "home": "Gatsby Template",
-  "404": "NOT FOUND",
-  "404_desc": "You just hit a route that doesn&#39;t exist... the sadness.",
+  "error404": "PAGE NOT FOUND",
+  "error404_desc": "You just hit a route that doesn't exist... the sadness.",
   "author": "author"
 }

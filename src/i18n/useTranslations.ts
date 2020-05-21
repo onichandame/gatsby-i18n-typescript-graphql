@@ -22,6 +22,9 @@ const query = graphql`
           name
           translations: childTranslationsJson {
             home
+            author
+            error404
+            error404_desc
           }
         }
       }
