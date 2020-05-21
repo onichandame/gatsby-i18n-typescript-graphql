@@ -11,17 +11,7 @@ export const localize = (locale: string, ...subpaths: string[]) => {
   subpaths = subpaths
     .map(subpath => trimSlashes(subpath))
     .filter(subpath => !!subpath)
+  if (locale !== defaultLocale) subpaths.unshift(locale)
   result = subpaths.join("/")
-  if (locale !== defaultLocale) {
-    if (result.endsWith(".html")) {
-      subpaths = result.split("/")
-      const endPoint = subpaths.pop()
-      subpaths.push(locale, endPoint)
-      result = "/" + subpaths.join("/")
-    } else {
-      result += "/" + locale
-    }
-  }
-  if (result[0] === "/") result.substr(1, result.length)
-  return result
+  return `/${result}`
 }
