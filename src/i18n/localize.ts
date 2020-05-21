@@ -22,6 +22,6 @@ export const localize = (locale: string, ...subpaths: string[]) => {
       result += "/" + locale
     }
   }
-  if (result[0] !== "/") result = "/" + result
+  if (result[0] === "/") result.substr(1, result.length)
   return result
 }
