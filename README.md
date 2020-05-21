@@ -1,6 +1,6 @@
 # gatsby template
 
-use this template to start off a gatsby project with ts, i18n and graphql
+use this template to start off a gatsby project with ts and i18n
 
 # Author
 
@@ -11,4 +11,7 @@ use this template to start off a gatsby project with ts, i18n and graphql
 - Gatsby.js
 - Typescript
 - i18n
-- GraphQL
+
+# Example
+
+<https://onichandame.github.com/gatsby-template>

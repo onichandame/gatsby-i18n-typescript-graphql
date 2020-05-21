@@ -1,16 +1,15 @@
-import React, { FC, useContext } from "react"
+import React, { FC } from "react"
 
-import { LocaleContext } from "../i18n"
-import { Layout } from "../components/Layout"
+import { useTranslation } from "../i18n"
 
 const NotFoundPage: FC = () => {
-  const locale = useContext(LocaleContext)
+  const trans = useTranslation()
 
   return (
-    <Layout title="404: Not found" locale={locale}>
-      <h1>NOT FOUND</h1>
-      <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-    </Layout>
+    <>
+      <h1>{trans["404"]}</h1>
+      <p>{trans["404_desc"]}</p>
+    </>
   )
 }
 

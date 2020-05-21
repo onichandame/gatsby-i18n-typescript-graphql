@@ -1,7 +1,6 @@
 import React, { FC } from "react"
 import { graphql, PageProps } from "gatsby"
 
-import { Layout } from "../components/Layout"
 import { Image } from "../components/Image"
 import { LocalizedLink } from "../i18n/LocalizedLink"
 
@@ -27,12 +26,9 @@ type Props = PageProps<
   { locale: string }
 >
 
-const IndexPage: FC<Props> = ({
-  data: { allMdx },
-  pageContext: { locale }
-}) => {
+const IndexPage: FC<Props> = ({ data: { allMdx } }) => {
   return (
-    <Layout title="Home" locale={locale}>
+    <>
       <h1>Hi</h1>
       <p>Welcome to my site.</p>
       <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
@@ -48,7 +44,7 @@ const IndexPage: FC<Props> = ({
           </div>
         ))}
       </div>
-    </Layout>
+    </>
   )
 }
 

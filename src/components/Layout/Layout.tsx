@@ -1,20 +1,17 @@
-import React, { FC, ComponentProps } from "react"
+import React, { FC } from "react"
+import { PageProps } from "gatsby"
 
 import { LocaleContext } from "../../i18n"
 import "./Layout.css"
 import { Header } from "./Header"
 import { Footer } from "./Footer"
-import { SEO } from "./SEO"
 
-type Props = {
-  locale: string
-} & ComponentProps<typeof SEO>
+type Props = PageProps<{}, { locale: string }>
 
-export const Layout: FC<Props> = ({ children, locale, title }) => {
+export const Layout: FC<Props> = ({ children, pageContext: { locale } }) => {
   return (
     <LocaleContext.Provider value={locale}>
       <Header />
-      <SEO title={title} />
       <div
         style={{
           margin: `0 auto`,

@@ -1,9 +1,9 @@
 require("ts-node").register({ files: true })
 
 const { localize } = require("./src/i18n/localize")
+const { locales } = require("./src/i18n/locales")
 
 const { basename, dirname } = require("path")
-const locales = require("./src/i18n/locales").default
 
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions

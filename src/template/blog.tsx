@@ -2,8 +2,6 @@ import React, { FC } from "react"
 import { graphql, PageProps } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-import { Layout } from "../components/Layout"
-
 type Props = PageProps<
   {
     mdx: {
@@ -20,12 +18,12 @@ type Props = PageProps<
   }
 >
 
-const Post: FC<Props> = ({ data: { mdx }, pageContext: { locale } }) => {
+const Post: FC<Props> = ({ data: { mdx } }) => {
   return (
-    <Layout title={mdx.frontmatter.title} locale={locale}>
+    <>
       <h1>{mdx.frontmatter.title}</h1>
       <MDXRenderer>{mdx.body}</MDXRenderer>
-    </Layout>
+    </>
   )
 }
 
