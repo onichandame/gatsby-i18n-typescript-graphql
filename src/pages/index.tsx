@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { graphql, PageProps } from "gatsby"
 
 import { Image } from "../components/Image"
-import { LocalizedLink } from "../i18n/LocalizedLink"
+import { LocalizedLink } from "../i18n"
 
 type Props = PageProps<
   {

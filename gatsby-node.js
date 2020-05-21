@@ -9,11 +9,9 @@ exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions
   deletePage(page)
   locales.map(locale => {
-    let localizedPath = locale ? localize(locale, page.path) : page.path
-
     return createPage({
       ...page,
-      path: localizedPath,
+      path: localize(locale, page.path),
       context: {
         ...page.context,
         locale
