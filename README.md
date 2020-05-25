@@ -20,4 +20,4 @@ use this template to start off a gatsby project with ts and i18n
 
 # Example
 
-<https://onichandame.github.io>
+<https://onichandame.com>
