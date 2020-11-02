@@ -6,15 +6,15 @@ import { locales, LocaleContext, replaceLocale } from "../../i18n"
 export const Lang: FC = () => {
   const locale = useContext(LocaleContext)
   return (
-    <select value={locale}>
+    <select
+      value={locale}
+      onChange={e => {
+        e.preventDefault()
+        navigate(replaceLocale(window.location.pathname, e.currentTarget.value))
+      }}
+    >
       {locales.map(locale => (
-        <option
-          onClick={() =>
-            navigate(replaceLocale(window.location.pathname, locale))
-          }
-          id={locale}
-          value={locale}
-        >
+        <option key={locale} id={locale} value={locale}>
           {locale}
         </option>
       ))}
