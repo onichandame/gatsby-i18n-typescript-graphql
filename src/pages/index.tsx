@@ -1,30 +1,11 @@
-import React, { FC } from "react"
-import { graphql, PageProps } from "gatsby"
+import React, { FC } from 'react'
+import { graphql, PageProps } from 'gatsby'
 
-import { Image } from "../components/Image"
-import { LocalizedLink } from "../i18n"
+import { Image } from '../components/Image'
+import { LocalizedLink } from '../i18n'
+import { TocQuery } from '../../graphql-types'
 
-type Props = PageProps<
-  {
-    allMdx: {
-      edges: {
-        node: {
-          frontmatter: {
-            title: string
-          }
-          fields: {
-            name: string
-            locale: string
-          }
-          parent: {
-            relativeDirectory: string
-          }
-        }
-      }[]
-    }
-  },
-  { locale: string }
->
+type Props = PageProps<TocQuery>
 
 const IndexPage: FC<Props> = ({ data: { allMdx } }) => {
   return (
@@ -50,7 +31,7 @@ const IndexPage: FC<Props> = ({ data: { allMdx } }) => {
 
 export default IndexPage
 
-export const query = graphql`
+export const pageQuery = graphql`
   query Toc($locale: String!) {
     allMdx(filter: { fields: { locale: { eq: $locale } } }) {
       edges {
