@@ -1,14 +1,14 @@
-import { useContext } from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { useContext } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 
-import { LocaleContext } from "./LocaleContext"
+import { LocaleContext } from './LocaleContext'
 
 export const useTranslation = (): { [key: string]: string } => {
   const currentLocale = useContext(LocaleContext)
   const { rawData } = useStaticQuery(query)
   const simplified = rawData.edges.map(({ node: { name, translations } }) => ({
     locale: name,
-    translations
+    translations,
   }))
   const result = simplified.filter(({ locale }) => locale === currentLocale)[0]
   return result.translations

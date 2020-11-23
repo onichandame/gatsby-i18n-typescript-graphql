@@ -1,30 +1,11 @@
-import React, { FC } from "react"
-import { graphql, PageProps } from "gatsby"
+import React, { FC } from 'react'
+import { graphql, PageProps } from 'gatsby'
 
-import { Image } from "../components/Image"
-import { LocalizedLink } from "../i18n"
+import { Image } from '../components/Image'
+import { LocalizedLink } from '../i18n'
+import { TocQuery } from '../../graphql-types'
 
-type Props = PageProps<
-  {
-    allMdx: {
-      edges: {
-        node: {
-          frontmatter: {
-            title: string
-          }
-          fields: {
-            name: string
-            locale: string
-          }
-          parent: {
-            relativeDirectory: string
-          }
-        }
-      }[]
-    }
-  },
-  { locale: string }
->
+type Props = PageProps<TocQuery>
 
 const IndexPage: FC<Props> = ({ data: { allMdx } }) => {
   return (
@@ -38,8 +19,8 @@ const IndexPage: FC<Props> = ({ data: { allMdx } }) => {
         {allMdx.edges.map(({ node: post }) => (
           <div>
             <h5>{post.frontmatter.title}</h5>
-            <LocalizedLink to={`posts/${post.parent.relativeDirectory}`}>
-              {post.parent.relativeDirectory}
+            <LocalizedLink to={post.fields.endpoint}>
+              {post.fields.slug}
             </LocalizedLink>
           </div>
         ))}
@@ -50,7 +31,7 @@ const IndexPage: FC<Props> = ({ data: { allMdx } }) => {
 
 export default IndexPage
 
-export const query = graphql`
+export const pageQuery = graphql`
   query Toc($locale: String!) {
     allMdx(filter: { fields: { locale: { eq: $locale } } }) {
       edges {
@@ -60,7 +41,8 @@ export const query = graphql`
             date
           }
           fields {
-            name
+            slug
+            endpoint
             locale
           }
           parent {
