@@ -18,7 +18,7 @@ export default {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${path.dirname(__dirname)}/src/images`,
+        path: path.join(path.dirname(__dirname), 'src', 'images'),
       },
     },
     `gatsby-transformer-sharp`,
@@ -40,7 +40,7 @@ export default {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'post',
-        path: `${path.dirname(__dirname)}/content/posts/`,
+        path: path.join(path.dirname(__dirname), 'content', 'posts'),
       },
     },
     'gatsby-plugin-mdx',

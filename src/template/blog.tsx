@@ -1,22 +1,10 @@
-import React, { FC } from "react"
-import { graphql, PageProps } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
+import React, { FC } from 'react'
+import { graphql, PageProps } from 'gatsby'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 
-type Props = PageProps<
-  {
-    mdx: {
-      frontmatter: {
-        title: string
-      }
-      body: string
-    }
-  },
-  {
-    locale: string
-    title: string
-    author: string
-  }
->
+import { PostQuery } from '../../graphql-types'
+
+type Props = PageProps<PostQuery>
 
 const Post: FC<Props> = ({ data: { mdx } }) => {
   return (

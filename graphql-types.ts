@@ -765,7 +765,8 @@ export type FileFieldsEnum =
   | 'childMdx___wordCount___sentences'
   | 'childMdx___wordCount___words'
   | 'childMdx___fields___locale'
-  | 'childMdx___fields___name'
+  | 'childMdx___fields___slug'
+  | 'childMdx___fields___endpoint'
   | 'childMdx___id'
   | 'childMdx___parent___id'
   | 'childMdx___parent___parent___id'
@@ -1528,7 +1529,8 @@ export type MdxEdge = {
 
 export type MdxFields = {
   locale?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+  endpoint?: Maybe<Scalars['String']>;
 };
 
 export type MdxFieldsEnum = 
@@ -1551,7 +1553,8 @@ export type MdxFieldsEnum =
   | 'wordCount___sentences'
   | 'wordCount___words'
   | 'fields___locale'
-  | 'fields___name'
+  | 'fields___slug'
+  | 'fields___endpoint'
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'
@@ -1641,7 +1644,8 @@ export type MdxFieldsEnum =
 
 export type MdxFieldsFilterInput = {
   locale?: Maybe<StringQueryOperatorInput>;
-  name?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  endpoint?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MdxFilterInput = {
@@ -2422,10 +2426,12 @@ export type SitePageConnectionGroupArgs = {
 
 export type SitePageContext = {
   locale?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextFilterInput = {
   locale?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageEdge = {
@@ -2528,6 +2534,7 @@ export type SitePageFieldsEnum =
   | 'internal___type'
   | 'isCreatedByStatefulCreatePages'
   | 'context___locale'
+  | 'context___title'
   | 'pluginCreator___id'
   | 'pluginCreator___parent___id'
   | 'pluginCreator___parent___parent___id'
@@ -3180,6 +3187,37 @@ export type TranslationsJsonSortInput = {
 export type WebPOptions = {
   quality?: Maybe<Scalars['Int']>;
 };
+
+export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_1_Query = { placeholderImage?: Maybe<{ childImageSharp?: Maybe<{ fluid?: Maybe<GatsbyImageSharpFluidFragment> }> }> };
+
+export type UseTranslationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UseTranslationsQuery = { rawData: { edges: Array<{ node: (
+        Pick<File, 'name'>
+        & { translations?: Maybe<Pick<TranslationsJson, 'home' | 'author' | 'error404' | 'error404_desc'>> }
+      ) }> } };
+
+export type TocQueryVariables = Exact<{
+  locale: Scalars['String'];
+}>;
+
+
+export type TocQuery = { allMdx: { edges: Array<{ node: { frontmatter?: Maybe<Pick<MdxFrontmatter, 'title' | 'date'>>, fields?: Maybe<Pick<MdxFields, 'slug' | 'endpoint' | 'locale'>>, parent?: Maybe<Pick<File, 'relativeDirectory'>> } }> } };
+
+export type PostQueryVariables = Exact<{
+  locale: Scalars['String'];
+  title: Scalars['String'];
+}>;
+
+
+export type PostQuery = { mdx?: Maybe<(
+    Pick<Mdx, 'body'>
+    & { frontmatter?: Maybe<Pick<MdxFrontmatter, 'title'>> }
+  )> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

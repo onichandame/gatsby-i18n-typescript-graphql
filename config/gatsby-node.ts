@@ -25,9 +25,10 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions }) => {
     if (typeof node.fileAbsolutePath !== `string`)
       throw new Error(`mdx file ${JSON.stringify(node)} not loaded correctly!`)
     const locale = path.basename(node.fileAbsolutePath, '.mdx')
-    const name = path.basename(path.dirname(node.fileAbsolutePath))
+    const slug = path.basename(path.dirname(node.fileAbsolutePath))
     createNodeField({ node, name: 'locale', value: locale })
-    createNodeField({ node, name: 'name', value: name })
+    createNodeField({ node, name: 'slug', value: slug })
+    createNodeField({ node, name: 'endpoint', value: `/posts/${slug}` })
   }
 }
 
@@ -35,35 +36,33 @@ export const createPages: GatsbyNode['createPages'] = async ({
   graphql,
   actions,
 }) => {
-  const template = require.resolve('./src/template/blog')
+  const templatePath = path.resolve(
+    path.dirname(__dirname),
+    `src`,
+    `template`,
+    `blog.tsx`
+  )
   const { createPage } = actions
   const blogs = await graphql<{
     blog: {
       edges: {
         node: {
-          relativeDirectory: string
-          childMdx: {
-            fields: { locale: string }
-            frontmatter: { title: string; author: string }
-          }
+          fields: { locale: string; endpoint: string }
+          frontmatter: { title: string }
         }
       }[]
     }
   }>(`
     {
-      blog: allFile(filter: { sourceInstanceName: { eq: "post" } }) {
+      blog: allMdx {
         edges {
           node {
-            relativeDirectory
-            childMdx {
-              fields {
-                locale
-              }
-              frontmatter {
-                title
-                author
-                date
-              }
+            fields {
+              locale
+              endpoint
+            }
+            frontmatter {
+              title
             }
           }
         }
@@ -71,21 +70,20 @@ export const createPages: GatsbyNode['createPages'] = async ({
     }
   `)
   if (blogs.errors) {
-    console.log(blogs.errors)
+    console.error(blogs.errors)
     return
   }
   const postList = blogs.data.blog.edges
   postList.forEach(({ node: post }) => {
-    const slug = post.relativeDirectory
-    const locale = post.childMdx.fields.locale
-    const { title, author } = post.childMdx.frontmatter
+    const endpoint = post.fields.endpoint
+    const locale = post.fields.locale
+    const { title } = post.frontmatter
     createPage({
-      path: localize(locale, `/posts/${slug}`),
-      component: template,
+      path: localize(locale, endpoint),
+      component: templatePath,
       context: {
         locale,
         title,
-        author,
       },
     })
   })
