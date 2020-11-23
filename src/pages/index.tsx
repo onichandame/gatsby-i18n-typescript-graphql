@@ -38,8 +38,8 @@ const IndexPage: FC<Props> = ({ data: { allMdx } }) => {
         {allMdx.edges.map(({ node: post }) => (
           <div>
             <h5>{post.frontmatter.title}</h5>
-            <LocalizedLink to={`posts/${post.parent.relativeDirectory}`}>
-              {post.parent.relativeDirectory}
+            <LocalizedLink to={post.fields.endpoint}>
+              {post.fields.slug}
             </LocalizedLink>
           </div>
         ))}
@@ -60,7 +60,8 @@ export const query = graphql`
             date
           }
           fields {
-            name
+            slug
+            endpoint
             locale
           }
           parent {
