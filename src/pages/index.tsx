@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { graphql, PageProps } from 'gatsby'
 
-import { Image } from '../components/Image'
+import { Image } from '../components/image'
 import { LocalizedLink } from '../i18n'
 import { TocQuery } from '../../graphql-types'
 

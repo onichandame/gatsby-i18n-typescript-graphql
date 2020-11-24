@@ -1,1 +1,1 @@
-export { wrapPageElement } from "./wrapPage"
+export { wrapPageElement } from './wrapPage'

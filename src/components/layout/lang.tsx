@@ -1,7 +1,7 @@
-import React, { FC, useContext } from "react"
-import { navigate } from "gatsby"
+import React, { FC, useContext } from 'react'
+import { navigate } from 'gatsby'
 
-import { locales, LocaleContext, replaceLocale } from "../../i18n"
+import { locales, LocaleContext, replaceLocale } from '../../i18n'
 
 export const Lang: FC = () => {
   const locale = useContext(LocaleContext)

@@ -26,7 +26,9 @@
   },
   "devDependencies": {
     "@types/react-helmet": "^6.1.0",
+    "husky": "^4.3.0",
     "prettier-eslint": "^11.0.0",
+    "pretty-quick": "^3.1.0",
     "ts-node": "^9.0.0",
     "yarn-or-npm": "^3.0.1"
   },
@@ -35,12 +37,18 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby build --prefix-paths",
     "dev": "gatsby develop -H 0.0.0.0 -p 3000",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "pretty-quick": "pretty-quick",
+    "format": "prettier --staged --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "start": "gatsby serve -H 0.0.0.0 -p $PORT",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format"
+    }
   },
   "repository": {
     "type": "git",

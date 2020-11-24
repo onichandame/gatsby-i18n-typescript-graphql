@@ -1,8 +1,8 @@
-import React, { FC } from "react"
+import React, { FC } from 'react'
 
-import { Lang } from "./Lang"
-import { LocalizedLink } from "../../i18n/LocalizedLink"
-import { useTranslation } from "../../i18n"
+import { Lang } from './lang'
+import { LocalizedLink } from '../../i18n/LocalizedLink'
+import { useTranslation } from '../../i18n'
 
 export const Header: FC = () => {
   const { home } = useTranslation()
@@ -10,7 +10,7 @@ export const Header: FC = () => {
     <header
       style={{
         background: `rebeccapurple`,
-        marginBottom: `1.45rem`
+        marginBottom: `1.45rem`,
       }}
     >
       <div
@@ -18,17 +18,17 @@ export const Header: FC = () => {
           margin: `0 auto`,
           maxWidth: 960,
           padding: `1.45rem 1.0875rem`,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-around"
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
         }}
       >
-        <h1 style={{ display: "flex", margin: 0 }}>
+        <h1 style={{ display: 'flex', margin: 0 }}>
           <LocalizedLink
             to="/"
             style={{
               color: `white`,
-              textDecoration: `none`
+              textDecoration: `none`,
             }}
           >
             {home}

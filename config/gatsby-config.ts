@@ -2,9 +2,10 @@ import path from 'path'
 import { GatsbyConfig } from 'gatsby'
 
 export default {
+  pathPrefix: `/`,
   plugins: [
     'gatsby-plugin-typescript',
-    { resolve: `gatsby-plugin-graphql-codegen` },
+    `gatsby-plugin-graphql-codegen`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
